@@ -1,6 +1,10 @@
-import { CourseParts } from '../types';
+import { CoursePart } from '../types';
 
-const Total = ({ courseParts } : CourseParts ) => {
+interface Props {
+  courseParts: CoursePart[];
+}
+
+const Total = ({ courseParts } : Props ) => {
     return (
       <p>
         Number of exercises{" "}
