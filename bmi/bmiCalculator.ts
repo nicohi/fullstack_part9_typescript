@@ -1,4 +1,4 @@
-import { getNums, logErrors } from './utils'
+import { getNums, logErrors } from './utils';
 
 const calculateBmiScore = (heightcm: number, weightkg: number) : number => {
     const heightm = heightcm / 100;
@@ -21,8 +21,8 @@ const calculateBmi = (heightcm: number, weightkg: number) : string => {
         return 'Obese (Class I)';
     if (35.0 <= score  && score <= 39.9)
         return 'Obese (Class II)';
-    if (40.0 <= score)
-        return 'Obese (Class III)';
+    //if (40.0 <= score)
+    return 'Obese (Class III)';
 }
 
 logErrors(() => {

@@ -2,7 +2,7 @@ export const argCount = (args: string[]) : number => args.length - 2;
 
 export const getNum = (index:number, args: string[]) : number => {
     if (!isNaN(Number(args[index]))) return Number(args[index]);
-    else throw new Error(`"{args[index]}" is not a number`);
+    else throw new Error(`"${args[index]}" is not a number`);
 }
 
 export const getNums = (count:number, args: string[]) : number[] => {

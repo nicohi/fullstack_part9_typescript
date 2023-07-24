@@ -1,4 +1,4 @@
-import { getNums, logErrors, argCount } from './utils'
+import { getNums, logErrors, argCount } from './utils';
 
 interface Result {
   periodLength: number;
