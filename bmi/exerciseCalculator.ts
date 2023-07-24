@@ -28,10 +28,14 @@ const calculateExercises = (hours: number[], target: number) : Result => {
     };
 }
 
-logErrors(() => {
+const main = () => logErrors(() => {
     const argc = argCount(process.argv);
     if (argc < 2) throw new Error('Too few arguments');
     const [target, ...hours] = getNums(argc, process.argv);
 
     console.log(calculateExercises(hours, target));
 })
+
+if (typeof require !== 'undefined' && require.main === module) {
+    main();
+}

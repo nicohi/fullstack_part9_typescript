@@ -5,7 +5,7 @@ const calculateBmiScore = (heightcm: number, weightkg: number) : number => {
     return weightkg / heightm ** 2;
 }
 
-const calculateBmi = (heightcm: number, weightkg: number) : string => {
+export const calculateBmi = (heightcm: number, weightkg: number) : string => {
     const score = calculateBmiScore(heightcm, weightkg);
     if (score < 16.0)
         return 'Underweight (Severe thinness)';
@@ -25,7 +25,11 @@ const calculateBmi = (heightcm: number, weightkg: number) : string => {
     return 'Obese (Class III)';
 }
 
-logErrors(() => {
+const main = () => logErrors(() => {
     const nums = getNums(2, process.argv);
     console.log(calculateBmi(nums[0], nums[1]));
 })
+
+if (typeof require !== 'undefined' && require.main === module) {
+    main();
+}
