@@ -3,7 +3,7 @@ import { getNums, logErrors } from './utils';
 const calculateBmiScore = (heightcm: number, weightkg: number) : number => {
     const heightm = heightcm / 100;
     return weightkg / heightm ** 2;
-}
+};
 
 export const calculateBmi = (heightcm: number, weightkg: number) : string => {
     const score = calculateBmiScore(heightcm, weightkg);
@@ -23,12 +23,12 @@ export const calculateBmi = (heightcm: number, weightkg: number) : string => {
         return 'Obese (Class II)';
     //if (40.0 <= score)
     return 'Obese (Class III)';
-}
+};
 
 const main = () => logErrors(() => {
     const nums = getNums(2, process.argv);
     console.log(calculateBmi(nums[0], nums[1]));
-})
+});
 
 if (typeof require !== 'undefined' && require.main === module) {
     main();

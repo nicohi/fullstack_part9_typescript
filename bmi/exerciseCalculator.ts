@@ -26,7 +26,7 @@ const calculateExercises = (hours: number[], target: number) : Result => {
         target,
         average,
     };
-}
+};
 
 const main = () => logErrors(() => {
     const argc = argCount(process.argv);
@@ -34,7 +34,7 @@ const main = () => logErrors(() => {
     const [target, ...hours] = getNums(argc, process.argv);
 
     console.log(calculateExercises(hours, target));
-})
+});
 
 if (typeof require !== 'undefined' && require.main === module) {
     main();

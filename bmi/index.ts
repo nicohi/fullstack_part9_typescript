@@ -5,10 +5,10 @@ import { errorHandler } from './middleware';
 const app = express();
 
 const parameterError = (message:string) : Error => {
-  let e = new Error(message)
-  e.name = 'ParameterError'
-  return e
-}
+  const e = new Error(message);
+  e.name = 'ParameterError';
+  return e;
+};
 
 app.get('/bmi', (req, res) => {
     const weight:number = Number(req.query.weight);
