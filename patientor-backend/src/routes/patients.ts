@@ -10,8 +10,16 @@ router.get('/', (_req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const data = patientService.addPatient(toNewPatient(req.body));
-    res.send(data);
+    try {
+        const data = patientService.addPatient(toNewPatient(req.body));
+        res.send(data);
+    } catch (error: unknown) {
+        let errorMessage = 'Something went wrong.';
+        if (error instanceof Error) {
+            errorMessage += ' Error: ' + error.message;
+        }
+        res.status(400).send(errorMessage);
+  }
 });
 
 export default router;
