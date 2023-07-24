@@ -4,5 +4,7 @@ export const errorHandler = (error:Error, _request:Express.Request, response:Exp
   console.error(error.message);
   if (error.name === 'ParameterError')
     return response.status(400).send({ error: 'malformatted parameters' });
+  if (error.name === 'MissingError')
+    return response.status(400).send({ error: 'parameters missing' });
   return next(error);
 };
