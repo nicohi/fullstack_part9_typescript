@@ -1,3 +1,5 @@
+import { getNums, logErrors } from './utils'
+
 const calculateBmiScore = (heightcm: number, weightkg: number) : number => {
     const heightm = heightcm / 100;
     return weightkg / heightm ** 2;
@@ -23,5 +25,7 @@ const calculateBmi = (heightcm: number, weightkg: number) : string => {
         return 'Obese (Class III)';
 }
 
-
-console.log(calculateBmi(180, 74));
+logErrors(() => {
+    const nums = getNums(2, process.argv);
+    console.log(calculateBmi(nums[0], nums[1]));
+})

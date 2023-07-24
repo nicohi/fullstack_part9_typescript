@@ -1,3 +1,5 @@
+import { getNums, logErrors, argCount } from './utils'
+
 interface Result {
   periodLength: number;
   trainingDays: number;
@@ -26,4 +28,10 @@ const calculateExercises = (hours: number[], target: number) : Result => {
     };
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2))
+logErrors(() => {
+    const argc = argCount(process.argv);
+    if (argc < 2) throw new Error('Too few arguments');
+    const [target, ...hours] = getNums(argc, process.argv);
+
+    console.log(calculateExercises(hours, target));
+})
