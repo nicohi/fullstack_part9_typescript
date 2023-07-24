@@ -1,6 +1,6 @@
 import express from 'express';
 import patientService from '../services/patientService';
-import { Patient } from '../types';
+import { NewPatient } from '../types';
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.get('/', (_req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const data = patientService.addPatient(req.body as Patient[]);
+    const data = patientService.addPatient(req.body as NewPatient);
     res.send(data);
 });
 
