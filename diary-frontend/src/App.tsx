@@ -47,14 +47,22 @@ const App = () => {
     setNewDiary(initialDiary);
   };
 
+  type radioFunction = ( s: string ) => () => void
+
+  const makeRadio = (name:string, t : object, fn : radioFunction) => (
+    <div>
+    {name}: {Object.values(t).map(o => <>{o}<input name={name} type='radio' value={o as string} onChange={fn(o)} /> </>)}
+    </div>
+  );
+
   return (
     <div>
       <h1>Add new entry</h1>
       <Notification message={message} />
       <form onSubmit={diaryCreation}>
         <div>date:<input value={newDiary.date} onChange={(event) => setNewDiary({ ...newDiary, date: event.target.value})} /></div>
-        <div>weather:<input value={newDiary.weather} onChange={(event) => setNewDiary({ ...newDiary, weather: event.target.value as Weather})} /></div>
-        <div>visibility:<input value={newDiary.visibility} onChange={(event) => setNewDiary({ ...newDiary, visibility: event.target.value as Visibility})} /></div>
+        {makeRadio('weather', Weather, s => () => setNewDiary({ ...newDiary, weather: s as Weather }))}
+        {makeRadio('visibility', Visibility, s => () => setNewDiary({ ...newDiary, visibility: s as Visibility }))}
         <div>comment:<input value={newDiary.comment} onChange={(event) => setNewDiary({ ...newDiary, comment: event.target.value})} /></div>
         <button type='submit'>add</button>
       </form>
