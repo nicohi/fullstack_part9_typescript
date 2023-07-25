@@ -1,4 +1,4 @@
-import { NewPatient, Gender, Entry } from './types';
+import { NewPatient, Gender, Entry, EntryType } from './types';
 
 const isGender = (param: string): param is Gender => {
   return Object.values(Gender).map(v => v.toString()).includes(param);
@@ -9,8 +9,10 @@ const isString = (text: unknown): text is string => {
 };
 
 const isEntry = (entry: unknown): entry is Entry => {
-  // TODO properly
-  return entry === entry;
+  if ( !entry || typeof entry !== 'object' ) {
+    throw new Error('Entry is not object');
+  }
+  return 'type' in entry && isString(entry.type) && Object.values(EntryType).includes(entry.type as EntryType);
 };
 
 const isDate = (date: string): boolean => {
@@ -38,7 +40,7 @@ const parseDate = (date: unknown): string => {
   return date;
 };
 
-const parseEntries = (es: unknown): Entry[] => {
+export const parseEntries = (es: unknown): Entry[] => {
   if (!es || !Array.isArray(es) || es.reduce((a:boolean,e)=> a || !isEntry(e),false)) {
       throw new Error('Not an array of entries: ' + es);
   }
@@ -51,14 +53,15 @@ export const toNewPatient = (object: unknown): NewPatient => {
   }
 
   if ('name' in object && 'dateOfBirth' in object && 'ssn' in object &&
-      'gender' in object && 'occupation' in object && 'entries' in object)  {
+      'gender' in object && 'occupation' in object)  {
+      //'gender' in object && 'occupation' in object && 'entries' in object)  {
     const newPatient: NewPatient = {
       name: parseString(object.name),
       dateOfBirth: parseDate(object.dateOfBirth),
       ssn: parseString(object.ssn),
       gender: parseGender(object.gender),
       occupation: parseString(object.occupation),
-      entries: parseEntries(object.entries),
+      //entries: parseEntries(object.entries),
     };
 
     return newPatient;
